@@ -44,14 +44,6 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-
-"if &loadplugins
-"    if has ('packages')
-"        packadd! NERDTree
-"        packadd! buffer-explorer
-"    endif
-"endif
-
 if  has('syntax')
     syn on
 endif
@@ -74,7 +66,7 @@ let g:netrw_winsize = 25
 "  autocmd VimEnter * :Vexplore
 "augroup END
 
-" quick access to NERDTree
+" quick access to netrw
 nnoremap <S-f>     :Vex<cr>
 
 " set F6 to turn off search highlight
