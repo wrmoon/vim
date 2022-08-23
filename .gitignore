@@ -1,8 +1,13 @@
-# Ignore everything
-*
+# Ignore everything in same directory
+/*
+/.*
 
 # But not these files
 !.gitignore
+!.vim
 !.vim/*
 !.vimrc
 !README.md
+
+.vim/.netrwhist
+
