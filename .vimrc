@@ -95,5 +95,7 @@ au BufRead,BufNewFile *.md set filetype=markdown wrap
 
 " I like the codedark codescheme, but not for git commits
 autocmd BufEnter * colorscheme codedark
-autocmd BufEnter COMMIT_EDITMSG colorscheme default
+autocmd BufEnter COMMIT_EDITMSG 
+    \ colorscheme default |
+    \ set background=dark
 
