@@ -36,8 +36,6 @@ if has('autocmd')
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
-
-  augroup END
 endif
 
 " faster window navigation
@@ -95,9 +93,5 @@ endif
 " vim shouldn't detect *.md files as modula2, but rather as markdown
 au BufRead,BufNewFile *.md set filetype=markdown wrap
 
-colorscheme moonDesert
-nnoremap <F2> :colorscheme moonDesert<cr>
-nnoremap <S-F2> :colorscheme visualstudio<cr>
+colorscheme codedark
 
-nnoremap <F3> :cnext<cr>
-nnoremap <S-F3> :cprevious<cr>
