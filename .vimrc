@@ -93,5 +93,7 @@ endif
 " vim shouldn't detect *.md files as modula2, but rather as markdown
 au BufRead,BufNewFile *.md set filetype=markdown wrap
 
-colorscheme codedark
+" I like the codedark codescheme, but not for git commits
+autocmd BufEnter * colorscheme codedark
+autocmd BufEnter COMMIT_EDITMSG colorscheme default
 
