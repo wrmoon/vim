@@ -92,3 +92,12 @@ else
     nnoremap K 	        :grep -w <cword> *.php *.c *.cpp *.h *.s *.py *.sh *.xml *.txt *.md<CR>
 endif
 
+" vim shouldn't detect *.md files as modula2, but rather as markdown
+au BufRead,BufNewFile *.md set filetype=markdown wrap
+
+colorscheme moonDesert
+nnoremap <F2> :colorscheme moonDesert<cr>
+nnoremap <S-F2> :colorscheme visualstudio<cr>
+
+nnoremap <F3> :cnext<cr>
+nnoremap <S-F3> :cprevious<cr>
