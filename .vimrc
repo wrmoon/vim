@@ -25,8 +25,10 @@ set statusline=[%n/%{bufnr('$')}]\ \ %<%f%h%w%1*%m%r%0*%=%y\ \ %4l,%-12.12(%-c%-
 set autoindent          " always set autoindenting on
 set autochdir           " set vim's working directory to the current buffer
 set directory=/tmp      " put swap files here
-set colorcolumn=+1      " when tw is turned on, show that column.
+set cc=+1,120           " when tw is turned on, show that column, and soft-limit 120
 set belloff=wildmode    " don't ring bell for wildcard completion
+" Don't use Ex mode, use Q for formatting
+map Q gq
 
 if has('autocmd')
   " When editing a file, always jump to the last known cursor position.
@@ -54,20 +56,8 @@ nmap ff     \be
 nmap fh     \bs
 nmap fv     \bv
 
-
-" NERDTree-like functionality but using built-in netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
-"augroup ProjectDrawer
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
-
-" quick access to netrw
-nnoremap <S-f>     :Vex<cr>
+" quick access to NERDTree
+nnoremap <S-f>     :NERDTree<cr>
 
 " set F6 to turn off search highlight
 nnoremap <F6> :nohlsearch<cr>
@@ -86,7 +76,7 @@ endif
 au BufRead,BufNewFile *.md set filetype=markdown wrap
 
 " I like the codedark codescheme, but not for git commits
-autocmd BufEnter * colorscheme codedark
+autocmd BufEnter * silent! colorscheme codedark
 autocmd BufEnter COMMIT_EDITMSG 
     \ colorscheme default |
     \ set background=dark
