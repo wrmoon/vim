@@ -4,3 +4,6 @@
 [submodule "NERDTree"]
 	path = .vim/pack/vendor/start/nerdtree
 	url = https://github.com/preservim/nerdtree
+[submodule "tmux-tpm-plugin"]
+	path = .tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
