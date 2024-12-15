@@ -9,7 +9,7 @@
 !.vimrc
 !.tmux.conf
 !.tmux/*
-!README.md
+!*.md
 
 .vim/.netrwhist
 
