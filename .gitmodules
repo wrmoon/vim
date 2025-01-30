@@ -1,3 +1,6 @@
 [submodule "vim-code-dark"]
 	path = .vim/pack/themes/start/vim-code-dark
 	url = https://github.com/tomasiser/vim-code-dark
+[submodule ".vim/pack/vendor/start/nerdtree"]
+	path = .vim/pack/vendor/start/nerdtree
+	url = https://github.com/preservim/nerdtree

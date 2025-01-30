@@ -5,7 +5,7 @@ set tabstop=4
 set shiftwidth=4
 set nocompatible
 set expandtab
-set textwidth=120
+set textwidth=90
 set nobackup            " do not keep a backup file, it will be OK
 set history=50          " keep 50 lines of command line history
 set ruler               " show the cursor position all the time
@@ -21,12 +21,17 @@ set shortmess=OtT       " truncate messages to avoid Hit Return... messages
 set smartindent         " do smart indenting when starting new line. 'cindent' overrides
 set shiftround          " indent 'shiftwidth' for > and < commands
 set sidescroll=1        " scroll by 1 horizontally
-set statusline=[%n/%{bufnr('$')}]\ \ %<%f%h%w%1*%m%r%0*%=%y\ \ %4l,%-12.12(%-c%-V%)\ \ \ \ %3.3p%%
 set autoindent          " always set autoindenting on
-set autochdir           " set vim's working directory to the current buffer
+"set autochdir           " set vim's working directory to the current buffer
 set directory=/tmp      " put swap files here
 set colorcolumn=+1      " when tw is turned on, show that column.
 set belloff=wildmode    " don't ring bell for wildcard completion
+set nu                  " number those lines
+
+" this gets redone with powerline, but here for backup
+set statusline=[%n/%{bufnr('$')}]\ \ %<%F%h%w%1*%m%r%0*%=%y\ \ %4l,%-12.12(%-c%-V%)\ \ \ \ %3.3p%%
+
+set guifont=Source\ Code\ Pro\ for\ Powerline\ 11
 
 if has('autocmd')
   " When editing a file, always jump to the last known cursor position.
@@ -44,50 +49,89 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
+" netrw has its own ctrl-l, that I don't like
+" spent way too much time trying to override. Went to /usr/share/vim/vim81/autoload/netrw.vim and altered there.
+" This did not work, after opening a dir in netrw:
+"au BufReadPost,BufWritePost,BufEnter,BufCreate,BufNew NetrwTreeListing :silent! nunmap <buffer> <c-l>
+
+" search navigation (after using :grep)
+nnoremap <c-right> :cnext<cr>
+nnoremap <c-left>  :cprev<cr>
+nnoremap <c-up>    :crewind<cr>
+nnoremap <c-down>  :clist<cr>
+
 if  has('syntax')
     syn on
 endif
 
 
 " quick access to buffer explorer
-nmap ff     \be
-nmap fh     \bs
-nmap fv     \bv
+nnoremap <silent> ff     :BufExplorer<CR>
+nnoremap <silent> ft     :ToggleBufExplorer<CR>
+nnoremap <silent> fh     :BufEnterHorizontalSplit<CR>
+nnoremap <silent> fv     :BufEnterVerticalSplit<CR>
 
+let g:bufExplorerSortBy='fullpath'
 
 " NERDTree-like functionality but using built-in netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
-"augroup ProjectDrawer
-"  autocmd!
-"  autocmd VimEnter * :Vexplore
-"augroup END
+"let g:netrw_banner = 0
+"let g:netrw_liststyle = 3
+"let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+"let g:netrw_winsize = 25
 
 " quick access to netrw
-nnoremap <S-f>     :Vex<cr>
+" nnoremap <S-f>     :Vex<cr>
+nnoremap <S-f>     :NERDTreeToggleVCS<cr>
+nnoremap ,f        :NERDTreeFind<CR>:wincmd p<CR>
+
+" turn on mouse wheel support
+set mouse=a
+ 
+
 
 " set F6 to turn off search highlight
 nnoremap <F6> :nohlsearch<cr>
 
 if has("win32")
     set grepprg=grep.exe\ -nH
-    " search character under cursor in source files
+    " search word under cursor in current directory
     nnoremap K 	        :grep -w <cword> *.php *.c *.cpp *.h *.s *.py *.bat *.xml *.txt *.md<CR>
 else
-    set grepprg=grep\ -nH
-    " search character under cursor in source files
-    nnoremap K 	        :grep -w <cword> *.php *.c *.cpp *.h *.s *.py *.sh *.xml *.txt *.md<CR>
+    set grepprg=grepc
+    " search word under cursor in all folders in project
+    nnoremap K 	        :grep -w <cword><CR>
 endif
+
+" Use real tabs in makefiles
+au BufEnter Makefile,*.mak  setlocal noexpandtab
 
 " vim shouldn't detect *.md files as modula2, but rather as markdown
 au BufRead,BufNewFile *.md set filetype=markdown wrap
 
-" I like the codedark codescheme, but not for git commits
-autocmd BufEnter * colorscheme codedark
-autocmd BufEnter COMMIT_EDITMSG 
-    \ colorscheme default |
-    \ set background=dark
+" vim should detect *.tpp files as cpp
+au BufRead,BufNewFile *.tpp set filetype=cpp
 
+set path=.,/usr/include,/opt/ti/ccs1230/bios_6_50_02_00/packages,/opt/ti/ccs1230/xdctools_3_62_01_16_core/packages
+
+set tags=./TAGS,../TAGS,/home/wmoon/code/Sparrow500/TAGS
+au BufWritePost *.c,*.cpp,*.h,*.py  silent! !myetags
+
+" autoload autogen files
+au BufReadPost */SharedMover/Corvus/Tests/*.{cpp,h},*/SharedMover/Corvus/Messages/*.{cpp,h,json} setlocal autoread
+
+" I like the codedark codescheme
+"if has("termguicolors")
+"    set termguicolors
+"endif
+colorscheme codedark
+autocmd BufEnter COMMIT_EDITMSG 
+    \ set tw=0
+"   \ colorscheme default |
+"   \ set background=dark |
+
+" powerline
+"set rtp+=/home/wmoon/.local/lib/python3.8/site-packages/powerline/bindings/vim
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
