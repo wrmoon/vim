@@ -104,7 +104,8 @@ autocmd BufEnter COMMIT_EDITMSG
 "   \ set background=dark |
 
 " powerline
-"set rtp+=/home/wmoon/.local/lib/python3.8/site-packages/powerline/bindings/vim
+"set rtp+=/usr/lib/python3/dist-packages/powerline/bindings/vim
+set rtp+=/usr/share/powerline/bindings/vim
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup
