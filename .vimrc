@@ -93,7 +93,6 @@ nnoremap ,f        :NERDTreeFind<CR>:wincmd p<CR>
 set mouse=a
  
 
-
 " set F6 to turn off search highlight
 nnoremap <F6> :nohlsearch<cr>
 
@@ -101,7 +100,7 @@ if has("win32")
     set grepprg=grep.exe\ -nH
     " search word under cursor in current directory
     nnoremap K 	        :grep -w <cword> *.php *.c *.cpp *.cc *.hh *.h *.hpp *.s *.py *.bat *.xml *.txt *.md<CR>
-else
+    " NOTE: This needs grepc tool installed in path
     set grepprg=grepc
     " search word under cursor in all folders in project
     nnoremap K 	        :grep -w <cword><CR>
@@ -127,18 +126,12 @@ au BufWritePost *.py  silent! !myetags py
 " autoload autogen files
 au BufReadPost */SharedMover/Corvus/Tests/*.{cpp,h},*/SharedMover/Corvus/Messages/*.{cpp,h,json} setlocal autoread
 
-" I like the codedark codescheme
-"if has("termguicolors")
-"    set termguicolors
-"endif
+" I like the codedark colorscheme
 colorscheme codedark
-autocmd BufEnter COMMIT_EDITMSG 
+autocmd BufEnter COMMIT_EDITMSG
     \ set tw=0
-"   \ colorscheme default |
-"   \ set background=dark |
 
 " powerline
-"set rtp+=/home/wmoon/.local/lib/python3.8/site-packages/powerline/bindings/vim
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
 python3 del powerline_setup

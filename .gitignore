@@ -7,7 +7,9 @@
 !.vim
 !.vim/*
 !.vimrc
-!README.md
+!.tmux.conf
+!.tmux/*
+!*.md
 
 .vim/.netrwhist
 
