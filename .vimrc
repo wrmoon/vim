@@ -100,7 +100,7 @@ if has("win32")
     set grepprg=grep.exe\ -nH
     " search word under cursor in current directory
     nnoremap K 	        :grep -w <cword> *.php *.c *.cpp *.cc *.hh *.h *.hpp *.s *.py *.bat *.xml *.txt *.md<CR>
-    " NOTE: This needs grepc tool installed in path
+else
     set grepprg=grepc
     " search word under cursor in all folders in project
     nnoremap K 	        :grep -w <cword><CR>
