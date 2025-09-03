@@ -60,6 +60,10 @@ nnoremap <c-left>  :cprev<cr>
 nnoremap <c-up>    :crewind<cr>
 nnoremap <c-down>  :clist<cr>
 
+" tag navigation
+nnoremap <c-F12> :tnext<cr>
+nnoremap <c-F11> :tprev<cr>
+
 if  has('syntax')
     syn on
 endif
@@ -96,7 +100,7 @@ nnoremap <F6> :nohlsearch<cr>
 if has("win32")
     set grepprg=grep.exe\ -nH
     " search word under cursor in current directory
-    nnoremap K 	        :grep -w <cword> *.php *.c *.cpp *.h *.s *.py *.bat *.xml *.txt *.md<CR>
+    nnoremap K 	        :grep -w <cword> *.php *.c *.cpp *.cc *.hh *.h *.hpp *.s *.py *.bat *.xml *.txt *.md<CR>
 else
     set grepprg=grepc
     " search word under cursor in all folders in project
@@ -114,8 +118,11 @@ au BufRead,BufNewFile *.tpp set filetype=cpp
 
 set path=.,/usr/include,/opt/ti/ccs1230/bios_6_50_02_00/packages,/opt/ti/ccs1230/xdctools_3_62_01_16_core/packages
 
-set tags=./TAGS,../TAGS,/home/wmoon/code/Sparrow500/TAGS
-au BufWritePost *.c,*.cpp,*.h,*.py  silent! !myetags
+au BufEnter * set tags=./TAGS,../TAGS,/home/wmoon/code/Sparrow500/TAGS,/opt/ti/ccs1230/bios_6_50_02_00/packages/ti/sysbios/TAGS
+au BufWritePost *.c,*.cpp,*.h  silent! !myetags c
+
+au BufEnter *.py set tags=./PTAGS,../PTAGS,/home/wmoon/code/Sparrow500/PTAGS
+au BufWritePost *.py  silent! !myetags py
 
 " autoload autogen files
 au BufReadPost */SharedMover/Corvus/Tests/*.{cpp,h},*/SharedMover/Corvus/Messages/*.{cpp,h,json} setlocal autoread
