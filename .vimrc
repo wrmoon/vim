@@ -115,6 +115,10 @@ au BufRead,BufNewFile *.md set filetype=markdown wrap
 " vim should detect *.tpp files as cpp
 au BufRead,BufNewFile *.tpp set filetype=cpp
 
+" NOTE: requires etags, and smartroot tool installed in path
+"set tags=./TAGS,../TAGS,../../TAGS,../../../TAGS,../../../../TAGS,../../../../../TAGS,../../../../../../TAGS
+"au BufWritePost *.c,*.cpp,*.h,*.py  silent! !etags -f $(smartroot)/TAGS --options=$(smartroot)/.etags_options $(smartroot) &
+
 set path=.,/usr/include,/opt/ti/ccs1230/bios_6_50_02_00/packages,/opt/ti/ccs1230/xdctools_3_62_01_16_core/packages
 
 au BufEnter * set tags=./TAGS,../TAGS,/home/wmoon/code/Sparrow500/TAGS,/opt/ti/ccs1230/bios_6_50_02_00/packages/ti/sysbios/TAGS
