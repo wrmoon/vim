@@ -8,8 +8,8 @@ To install:
 ```
 ln -s ~/code/vim/.vim ~/.vim
 ln -s ~/code/vim/.vimrc ~/.vimrc
-ln -s ~/code/.tmux.conf ~/.tmux.conf
-ln -s ~/code/.tmux ~/.tmux
+ln -s ~/code/vim/.tmux.conf ~/.tmux.conf
+ln -s ~/code/vim/.tmux ~/.tmux
 ```
 To update:
 1. `git pull --recurse-submodules`
